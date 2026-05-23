@@ -82,9 +82,11 @@ export function parseOEPLArrayToLayout(oeplArray) {
                 const templateInfo = extractInfoFromTemplate(textVal);
                 const size = parseInt(item.size || 20, 10);
                 const reverseAnchorMap = {
-                    "lt": "TOP_LEFT", "ct": "TOP_CENTER", "rt": "TOP_RIGHT",
-                    "lm": "CENTER_LEFT", "cm": "CENTER", "rm": "CENTER_RIGHT",
-                    "lb": "BOTTOM_LEFT", "cb": "BOTTOM_CENTER", "rb": "BOTTOM_RIGHT"
+                    "lt": "TOP_LEFT", "mt": "TOP_CENTER", "rt": "TOP_RIGHT",
+                    "lm": "CENTER_LEFT", "mm": "CENTER", "rm": "CENTER_RIGHT",
+                    "lb": "BOTTOM_LEFT", "mb": "BOTTOM_CENTER", "rb": "BOTTOM_RIGHT",
+                    "tl": "TOP_LEFT", "ct": "TOP_CENTER", "cm": "CENTER",
+                    "cb": "BOTTOM_CENTER", "mc": "CENTER"
                 };
 
                 if (templateInfo) {

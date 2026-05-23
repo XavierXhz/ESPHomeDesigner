@@ -149,7 +149,7 @@ describe('oepl_parser', () => {
                 value: 'Centered label',
                 size: 18,
                 max_width: 144,
-                anchor: 'cm',
+                anchor: 'mm',
                 font: 'Roboto.ttf',
                 color: 'black'
             },
@@ -158,7 +158,7 @@ describe('oepl_parser', () => {
                 value: "Temp: {{ states('sensor.temp') }} C",
                 size: 16,
                 max_width: 132,
-                anchor: 'cm',
+                anchor: 'mm',
                 font: 'Roboto.ttf',
                 color: 'black'
             }

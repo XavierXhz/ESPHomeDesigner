@@ -323,7 +323,7 @@ describe('text plugin rendering and export variants', () => {
 
         expect(openDisplay).toMatchObject({
             type: 'text',
-            anchor: 'cm',
+            anchor: 'mm',
             max_width: 72
         });
     });

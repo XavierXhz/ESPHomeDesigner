@@ -3,6 +3,19 @@ import { Logger } from '../../utils/logger.js';
 import { registry } from '../../core/plugin_registry.js';
 
 const DEFAULT_ODP_REFRESH_TYPE = "0";
+const ORIENTATION_ROTATION = {
+    portrait: 90,
+    landscape_inverted: 180,
+    portrait_inverted: 270
+};
+
+/**
+ * @param {string} orientation
+ * @returns {number}
+ */
+function getRotateForOrientation(orientation) {
+    return ORIENTATION_ROTATION[orientation] ?? 0;
+}
 
 /**
  * @param {unknown} value
@@ -115,7 +128,7 @@ export class OpenDisplayAdapter extends BaseAdapter {
 
         // Determine rotation based on orientation
         const orientation = layout.orientation || "landscape";
-        const rotate = (orientation === "portrait") ? 90 : 0;
+        const rotate = getRotateForOrientation(orientation);
 
         // Get device ID from settings, with backwards-compatible legacy fallback
         const settings = layout.settings || {};

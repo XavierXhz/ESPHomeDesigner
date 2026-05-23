@@ -1,3 +1,17 @@
+## v1.0.0 RC13 - OpenDisplay Anchors & Portrait Rotation
+**Release Date:** May 23, 2026
+
+This RC13 release closes the latest OpenDisplay and portrait-orientation regressions reported in [Issue #401](https://github.com/koosoli/ESPHomeDesigner/issues/401) and [Issue #399](https://github.com/koosoli/ESPHomeDesigner/issues/399). OpenDisplay text payloads now use Pillow-compatible anchors, and package-based display templates now receive an explicit display rotation when portrait mode is selected.
+
+### Stability & Verification
+- **OpenDisplay Text Anchor Compatibility (Issue #401):** Text, sensor text, and date/time OpenDisplay exports now emit Pillow-style anchors such as `mt`, `mm`, and `mb` instead of unsupported center-first values like `ct`, `cm`, and `cb`.
+- **Portrait Rotation for Package Templates (Issue #399):** Package-based hardware snippets now inject a `rotation:` field when the template does not already contain one, fixing portrait export for boards such as the Waveshare ESP32-S3 Touch LCD 4.3.
+- **Orientation Round-Trip Repair (Issue #399):** YAML and OpenDisplay imports now infer portrait orientation from display `rotation:` or action `rotate:` values when no generated orientation header is available.
+- **Release Metadata Refresh:** Updated the package version, package lock metadata, Home Assistant manifest version, runtime version string, visible header label, release notes heading/date, and rebuilt frontend assets for the RC13 release line.
+
+
+---
+
 ## v1.0.0 RC12.14 - HACS Wrapper Compatibility
 **Release Date:** May 12, 2026
 

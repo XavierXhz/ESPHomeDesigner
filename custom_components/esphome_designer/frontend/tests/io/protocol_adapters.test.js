@@ -116,4 +116,30 @@ describe('Protocol Adapters round-trip invariants', () => {
         expect(yaml).not.toContain('w_hidden');
         expect(yaml).not.toContain('w_group');
     });
+
+    it('maps inverted orientations to protocol rotation values', async () => {
+        const oepl = new OEPLAdapter();
+        const openDisplay = new OpenDisplayAdapter();
+        const baseLayout = {
+            currentPageIndex: 0,
+            settings: {},
+            pages: [{
+                widgets: [
+                    { id: 'w_text', type: 'text', x: 0, y: 0, props: { text: 'Rotate' } }
+                ]
+            }]
+        };
+
+        const oeplJson = JSON.parse(await oepl.generate({
+            ...baseLayout,
+            orientation: 'portrait_inverted'
+        }));
+        const odpYaml = await openDisplay.generate({
+            ...baseLayout,
+            orientation: 'landscape_inverted'
+        });
+
+        expect(oeplJson.data.rotate).toBe(270);
+        expect(odpYaml).toContain('rotate: 180');
+    });
 });

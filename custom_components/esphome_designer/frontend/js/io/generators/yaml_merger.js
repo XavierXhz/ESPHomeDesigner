@@ -7,6 +7,27 @@ import { Logger } from '../../utils/logger.js';
 
 /**
  * @param {string} yaml
+ * @param {number} rotation
+ * @returns {string}
+ */
+function setDisplayRotation(yaml, rotation) {
+    const rotationRegex = /(display:[\s\S]*?rotation:\s*)\d+/;
+    if (rotationRegex.test(yaml)) {
+        return yaml.replace(rotationRegex, `$1${rotation}`);
+    }
+
+    const displayItemMatch = yaml.match(/^(?<indent>\s*)-\s+platform:\s+[^\n]+\n(?<body>(?:\k<indent> {2,}.*\n?)*)/m);
+    if (!displayItemMatch?.groups) {
+        return yaml;
+    }
+
+    const insertAt = displayItemMatch.index + displayItemMatch[0].length;
+    const propIndent = `${displayItemMatch.groups.indent}  `;
+    return `${yaml.slice(0, insertAt)}${propIndent}rotation: ${rotation}\n${yaml.slice(insertAt)}`;
+}
+
+/**
+ * @param {string} yaml
  * @param {Record<string, any>} profile
  * @param {string} orientation
  * @param {boolean} [isLvgl=false]
@@ -57,8 +78,8 @@ export function applyPackageOverrides(yaml, profile, orientation, isLvgl = false
 
         Logger.log(`[Adapter] Orientation: ${orientation}, base rotation: ${baseRotation}, offset: ${rotationOffset}, final: ${rotation}`);
 
-        // Apply rotation to YAML
-        yaml = yaml.replace(/(display:[\s\S]*?rotation:\s*)\d+/g, `$1${rotation}`);
+        // Apply rotation to YAML, including package templates that omit it by default.
+        yaml = setDisplayRotation(yaml, rotation);
 
         // Note: Do NOT swap width/height in the dimensions block.
         // The dimensions: block describes the physical panel hardware specs.

@@ -389,7 +389,7 @@ describe('sensor_text export variants', () => {
         });
         expect(centeredOpenDisplay).toMatchObject({
             type: 'text',
-            anchor: 'cm',
+            anchor: 'mm',
             max_width: 96
         });
 

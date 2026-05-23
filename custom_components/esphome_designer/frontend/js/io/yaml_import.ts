@@ -207,6 +207,19 @@ function extractServicePayloadArray(yamlText: string): any[] | null {
     }
 }
 
+function applyProtocolRotation(layout: ParsedLayout | null, rotate: unknown): ParsedLayout | null {
+    if (!layout) return layout;
+    const numericRotate = Number(rotate);
+    if (!Number.isFinite(numericRotate)) return layout;
+
+    const normalizedRotate = ((numericRotate % 360) + 360) % 360;
+    layout.settings = {
+        ...(layout.settings || {}),
+        orientation: (normalizedRotate === 90 || normalizedRotate === 270) ? 'portrait' : 'landscape'
+    };
+    return layout;
+}
+
 function getLineIndent(line: string): number {
     return (line.match(/^\s*/) || [''])[0].length;
 }
@@ -443,7 +456,7 @@ export function parseSnippetYamlOffline(yamlText: string): ParsedLayout | null {
 
             if (Array.isArray(payload)) {
                 Logger.log("[parseSnippetYamlOffline] Detected full ODP/OEPL service call");
-                return parseOEPLArrayToLayout(payload);
+                return applyProtocolRotation(parseOEPLArrayToLayout(payload), doc.data.rotate);
             }
         }
     }
