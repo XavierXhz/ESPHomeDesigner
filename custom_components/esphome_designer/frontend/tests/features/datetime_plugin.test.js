@@ -107,6 +107,50 @@ describe('datetime plugin', () => {
         expect(oepl.font).toBe('ppb.ttf');
     });
 
+    it('exports single-line OpenDisplay date/time anchors without treating CENTER as vertical center', () => {
+        const topCenter = plugin.exportOpenDisplay({
+            x: 10,
+            y: 20,
+            width: 100,
+            height: 50,
+            props: {
+                format: 'time_only',
+                text_align: 'TOP_CENTER'
+            }
+        }, {
+            layout: { darkMode: false },
+            _page: {}
+        });
+
+        expect(topCenter).toMatchObject({
+            type: 'text',
+            x: 60,
+            y: 20,
+            anchor: 'mt'
+        });
+
+        const centerRight = plugin.exportOpenDisplay({
+            x: 10,
+            y: 20,
+            width: 100,
+            height: 50,
+            props: {
+                format: 'date_only',
+                text_align: 'CENTER_RIGHT'
+            }
+        }, {
+            layout: { darkMode: false },
+            _page: {}
+        });
+
+        expect(centerRight).toMatchObject({
+            type: 'text',
+            x: 110,
+            y: 45,
+            anchor: 'rm'
+        });
+    });
+
     it('collects fonts and emits direct-mode strftime lines with multi-line alignment', () => {
         const addFont = vi.fn((family, weight, size) => `${family}_${weight}_${size}`);
 

@@ -21,6 +21,10 @@ vi.mock('../../js/utils/logger.js', () => ({
 }));
 
 import { OpenDisplayAdapter } from '../../js/io/adapters/opendisplay_adapter.js';
+import {
+    normalizeOpenDisplayAnchor,
+    openDisplayTextPosition
+} from '../../js/io/adapters/opendisplay_helpers.js';
 
 describe('OpenDisplayAdapter details', () => {
     beforeEach(() => {
@@ -119,6 +123,23 @@ describe('OpenDisplayAdapter details', () => {
         expect(yaml).toContain('y: 20');
         expect(yaml).toContain('anchor: mt');
         expect(yaml).not.toMatch(/anchor:\s*(?:ct|cm|cb|tc|cc|bc)\b/);
+    });
+
+    it('maps designer text alignments to Pillow-compatible anchors and coordinates', () => {
+        const widget = { x: 10, y: 20, width: 100, height: 30 };
+
+        expect(openDisplayTextPosition(widget, 'TOP_LEFT')).toEqual({ anchor: 'lt', x: 10, y: 20 });
+        expect(openDisplayTextPosition(widget, 'TOP_CENTER')).toEqual({ anchor: 'mt', x: 60, y: 20 });
+        expect(openDisplayTextPosition(widget, 'TOP_RIGHT')).toEqual({ anchor: 'rt', x: 110, y: 20 });
+        expect(openDisplayTextPosition(widget, 'CENTER_LEFT')).toEqual({ anchor: 'lm', x: 10, y: 35 });
+        expect(openDisplayTextPosition(widget, 'CENTER')).toEqual({ anchor: 'mm', x: 60, y: 35 });
+        expect(openDisplayTextPosition(widget, 'CENTER_RIGHT')).toEqual({ anchor: 'rm', x: 110, y: 35 });
+        expect(openDisplayTextPosition(widget, 'BOTTOM_LEFT')).toEqual({ anchor: 'lb', x: 10, y: 50 });
+        expect(openDisplayTextPosition(widget, 'BOTTOM_CENTER')).toEqual({ anchor: 'mb', x: 60, y: 50 });
+        expect(openDisplayTextPosition(widget, 'BOTTOM_RIGHT')).toEqual({ anchor: 'rb', x: 110, y: 50 });
+
+        expect(normalizeOpenDisplayAnchor('ct')).toBe('mt');
+        expect(normalizeOpenDisplayAnchor('bc')).toBe('mb');
     });
 
     it('warns once per unsupported widget type and skips those widgets', async () => {

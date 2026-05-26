@@ -1,3 +1,17 @@
+## v1.0.0 RC14.1 - OpenDisplay Anchor Follow-up
+**Release Date:** May 26, 2026
+
+This RC14.1 follow-up tightens the OpenDisplay anchor compatibility work from RC14 after rechecking the Pillow text-anchor semantics against the OpenDisplay payload contract.
+
+### Stability & Verification
+- **OpenDisplay Anchor Semantics:** Confirmed that ESPHome Designer's 9-position alignment model should emit Pillow-compatible visual anchors such as `lt`, `mt`, `mm`, and `rb`, while avoiding baseline-specific anchors such as `ms` for center alignment.
+- **Date/Time OpenDisplay Alignment:** Date/time OpenDisplay exports now reuse the shared anchor-position helper, preventing `TOP_CENTER` and related alignments from being interpreted as vertical center positions.
+- **Anchor Regression Coverage:** Added focused tests for all 9 designer-to-Pillow anchor mappings and date/time OpenDisplay anchor positioning.
+- **Release Metadata Refresh:** Updated the package version, package lock metadata, Home Assistant manifest version, runtime version string, visible header label, release notes heading/date, and rebuilt frontend assets for the RC14.1 release line.
+
+
+---
+
 ## v1.0.0 RC14 - OpenDisplay Icons & C/C++ Export
 **Release Date:** May 25, 2026
 
