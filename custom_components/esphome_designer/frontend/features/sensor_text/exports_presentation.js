@@ -4,7 +4,7 @@ import { getNestedValue } from '../../js/utils/helpers.js';
 import { openDisplayTextPosition } from '../../js/io/adapters/opendisplay_helpers.js';
 import { HA_TEXT_DOMAINS, hexToRgb, isColorDisplay, isStrictlyNumeric } from './shared.js';
 
-/** @typedef {Widget & { props?: Record<string, any>, entity_id?: string, entity_id_2?: string, title?: string }} SensorTextWidget */
+/** @typedef {Widget & { props?: Record<string, any>, entity_id?: string, entity_id_2?: string, title?: string, x?: number, y?: number, width?: number, height?: number }} SensorTextWidget */
 
 /**
  * @param {SensorTextWidget} w
