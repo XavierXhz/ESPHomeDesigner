@@ -1,3 +1,20 @@
+## v1.0.0 RC18 - Precision Editing & Hardware Profiles
+**Release Date:** June 3, 2026
+
+This RC18 release adds the requested precision-positioning editor improvements and expands bundled display hardware coverage with M5Stack Tab5 and GeekMagic Mini profiles.
+
+### Stability & Verification
+- **Precision Widget Nudging (Issue #411):** Selected widgets can now be moved with the arrow keys in 1 px steps, with Shift+Arrow providing a 10 px step for larger adjustments while preserving editable-field arrow navigation.
+- **Zoom-Stable Selection Controls (Issue #411):** Resize handles and the multi-selection toolbar now keep a consistent on-screen size when zooming into the canvas, reducing obstruction during detailed placement work.
+- **Active Artboard Drag Stability (Issue #411):** The active artboard highlight no longer shifts the artboard upward, so selected widgets keep their visual coordinate plane during precision dragging.
+- **M5Stack Tab5 Profile (Issue #397):** Added a bundled ESP32-P4/MIPI DSI hardware recipe for the M5Stack Tab5 using the current M5STACK-TAB5-V2 display model and ST7123 touchscreen platform, with comments for older M5STACK-TAB5/GT911 units.
+- **GeekMagic Mini ESP8266 Profile (PR #398):** Added the GeekMagic Mini ESP8266/ST7789V recipe and parser coverage so the profile is available from the bundled hardware list.
+- **Regression Coverage Expansion:** Added focused tests for arrow-key nudging, zoom-stable context toolbar scaling, and bundled hardware metadata parsing for both new profiles.
+- **Release Metadata Refresh:** Updated package metadata, package lock metadata, Home Assistant manifest version, visible header label, release notes, and rebuilt frontend assets for the RC18 release line.
+
+
+---
+
 ## v1.0.0 RC17 - Minimal YAML Copy & LVGL Import Follow-up
 **Release Date:** June 1, 2026
 
