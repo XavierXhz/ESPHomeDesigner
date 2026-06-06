@@ -1,3 +1,17 @@
+## v1.0.0 RC19 - Autosave Control & MIPI Custom Hardware
+**Release Date:** June 6, 2026
+
+This RC19 release addresses the latest layout-saving and hardware-profile feedback from issues #415 and #416 plus discussion #254, while confirming the native LVGL button import path from issue #409 remains covered.
+
+### Stability & Verification
+- **Autosave Preference (Issue #415):** Editor Preferences now includes an **Automatically save layout changes** control. It stays enabled by default for existing behavior, but users can turn it off to prevent background saves while keeping the explicit **Save Layout** button available.
+- **MIPI Custom Hardware Editing (Issue #416 / Discussion #254):** Custom hardware profiles now expose MIPI DSI, MIPI SPI/DBI, MIPI RGB, ST7701S, and ST7123 options. Imported MIPI profiles preserve their display platform/model in the edit form, and generated MIPI DSI recipes use display dimensions without SPI-only control-pin output.
+- **Issue #409 Regression Check:** Native LVGL button YAML import remains covered for the two-button HA switch case, and export-side entity registration now explicitly verifies one Home Assistant switch definition per imported button entity with no duplicate binary sensor registration.
+- **Release Metadata Refresh:** Updated package metadata, package lock metadata, Home Assistant manifest version, runtime version string, visible header label, release notes, and rebuilt frontend assets for the RC19 release line.
+
+
+---
+
 ## v1.0.0 RC18.2 - Sunton Display & Weather Helper Hotfix
 **Release Date:** June 4, 2026
 

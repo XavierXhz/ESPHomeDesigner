@@ -1,6 +1,6 @@
 {
   "name": "esphome-designer-frontend",
-  "version": "1.0.0-rc.18.2",
+  "version": "1.0.0-rc.19",
   "description": "Frontend for ESPHome Designer",
   "type": "module",
   "main": "index.html",
