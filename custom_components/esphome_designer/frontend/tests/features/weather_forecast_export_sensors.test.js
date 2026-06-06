@@ -89,7 +89,7 @@ describe('weather_forecast export_sensors', () => {
         });
 
         const output = lines.join('\n');
-        expect(output).toContain("name: 'Weather Forecast Plus 2h'");
+        expect(output).toContain("name: 'Weather Forecast Plus 2h High'");
         expect(output).toContain("timedelta(hours=2)");
         expect(output).toContain("weather_forecast_plus_2h_condition");
         expect(output).toContain("{{ hit.condition if hit else 'unknown' }}");

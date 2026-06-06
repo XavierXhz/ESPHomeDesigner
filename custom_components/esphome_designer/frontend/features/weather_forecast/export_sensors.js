@@ -261,7 +261,7 @@ export const onExportTextSensors = (context) => {
 
             sortedSlots.forEach(slot => {
                 if (isRelative) {
-                    lines.push(`#       - name: 'Weather Forecast Plus ${slot}h'`);
+                    lines.push(`#       - name: 'Weather Forecast Plus ${slot}h High'`);
                     lines.push(`#         unique_id: weather_forecast_plus_${slot}h_high`);
                     lines.push(`#         default_entity_id: sensor.weather_forecast_plus_${slot}h_high`);
                     lines.push(`#         unit_of_measurement: '${unitSymbol}'`);

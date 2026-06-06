@@ -1,3 +1,15 @@
+## v1.0.0 RC19.1 - Hourly Weather Forecast Hotfix
+**Release Date:** June 6, 2026
+
+This RC19.1 hotfix addresses the hourly forecast temperature mismatch reported in [Issue #414](https://github.com/koosoli/ESPHomeDesigner/issues/414).
+
+### Stability & Verification
+- **Relative Hourly Temperature Entity Fix:** Generated Home Assistant helper YAML now names relative hourly temperature sensors with the `High` suffix, so Home Assistant's generated entity IDs line up with the ESPHome sensors that the display subscribes to.
+- **Regression Coverage:** Added focused weather forecast tests for the corrected relative hourly helper YAML in both export comments and the Copy HA YAML workflow.
+- **Release Metadata Refresh:** Updated package metadata, package lock metadata, Home Assistant manifest version, runtime version string, visible header label, release notes, and rebuilt frontend assets for the RC19.1 hotfix line.
+
+---
+
 ## v1.0.0 RC19 - Autosave Control & MIPI Custom Hardware
 **Release Date:** June 6, 2026
 
