@@ -11,8 +11,8 @@ import { DAY_LANGUAGE_OPTIONS, DEFAULT_DAY_LANGUAGE } from './day_labels.js';
  */
 const buildRelativeHourlyHelperYaml = (weatherEntity, slot, unitSymbol) => `
       - name: 'Weather Forecast Plus ${slot}h High'
-        unique_id: weather_forecast_plus_${slot}h_high
-        default_entity_id: sensor.weather_forecast_plus_${slot}h_high
+        unique_id: weather_forecast_plus_${slot}h
+        default_entity_id: sensor.weather_forecast_plus_${slot}h
         unit_of_measurement: '${unitSymbol}'
         state: >
           {% set fc = hourly['${weatherEntity}'].forecast %}
@@ -48,8 +48,8 @@ const buildFixedHourlyHelperYaml = (weatherEntity, slot, unitSymbol) => {
     const paddedSlot = String(slot).padStart(2, '0');
     return `
       - name: 'Weather Forecast Hour ${slot}00 High'
-        unique_id: weather_forecast_hour_${slot}00_high
-        default_entity_id: sensor.weather_forecast_hour_${slot}00_high
+        unique_id: weather_forecast_hour_${slot}00
+        default_entity_id: sensor.weather_forecast_hour_${slot}00
         unit_of_measurement: '${unitSymbol}'
         state: >
           {% set fc = hourly['${weatherEntity}'].forecast %}
