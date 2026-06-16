@@ -1,3 +1,14 @@
+## v1.0.0-rc20.3 - Online Image LVGL Recolor Fix
+**Release Date:** June 16, 2026
+
+This RC20.3 hotfix addresses the online image recolor bug in LVGL mode.
+
+### Stability & Verification
+- **LVGL Online Image Recolor Fix (Issue #417):** Online images in LVGL mode now use `image_recolor_opa: "transp"` instead of unconditionally forcing `"cover"`, preventing downloaded images from being completely tinted/hidden in the generated layout.
+- **Release Metadata Refresh:** Updated package metadata, Home Assistant manifest version, runtime version string, visible header label, release notes, and rebuilt frontend assets for the RC20.3 hotfix line.
+
+---
+
 ## v1.0.0-rc20.2 - LVGL Touchscreen & Image Hotfix
 **Release Date:** June 10, 2026
 
