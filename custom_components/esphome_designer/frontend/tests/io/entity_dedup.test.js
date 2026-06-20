@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
+import { makeSafeId } from '../../js/utils/export_helpers.js';
 import {
     isEntityStateNonNumeric,
     collectNumericSensors,
@@ -104,7 +105,7 @@ describe('Entity Deduplication & Registration', () => {
             const pages = [{ widgets: [{ type: 'sensor_text', entity_id: longId }] }];
             const result = collectNumericSensors(pages, context);
 
-            const expectedId = longId.replace(/[^a-zA-Z0-9_]/g, "_").substring(0, 63);
+            const expectedId = makeSafeId(longId);
             expect(result).toContain(`  id: ${expectedId}`);
         });
 

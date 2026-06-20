@@ -1,3 +1,16 @@
+## v1.0.0 RC24 - Long Entity ID Collision Fix
+**Release Date:** June 20, 2026
+
+This RC24 release resolves an issue where extremely long Home Assistant entity IDs sharing a prefix would collide during ESPHome layout generation.
+
+### Stability & Verification
+- **Long Entity ID Collision Resolution (Issue #429):** The `makeSafeId` function now uses a deterministic base36 hashing utility `getSimpleHash` to produce unique 63-character safe ESPHome identifiers when entity names exceed the length limit.
+- **Consolidated safe ID generator:** Removed all duplicate local implementations of the `makeSafeId` helper across widget plugins (such as `sensor_text`, `weather_icon`, and `quote_rss`) and consolidated them to import the centralized helper from `export_helpers.js`.
+- **ESPHome rounded_rectangle compilation fix (Issue #426):** Replaced invalid `rounded_rectangle` calls in the weather forecast widget with a custom `draw_rrect_border` helper lambda to draw non-filled rounded corners, resolving C++ compilation failures during ESPHome builds.
+- **Release Metadata Refresh:** Updated package metadata, Home Assistant manifest version, runtime version string, visible header label, release notes, and rebuilt frontend assets for the RC24 release line.
+
+---
+
 ## v1.0.0 RC23 - E-Paper Color Inversion & Widget Import Stability Fixes
 **Release Date:** June 20, 2026
 
