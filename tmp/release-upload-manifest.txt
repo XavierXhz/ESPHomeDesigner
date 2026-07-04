@@ -1,7 +1,7 @@
 ESPHome Designer release upload checklist
-Generated: 2026-06-20T16:33:09.866Z
-Version: 1.0.0-rc.24
-GUI label: v1.0.0 RC24
+Generated: 2026-07-03T12:01:21.308Z
+Version: 1.0.0-rc.25
+GUI label: v1.0.0 RC25
 
 Required upload set for a version/frontend release:
 - custom_components/esphome_designer/manifest.json
@@ -27,6 +27,3 @@ Upload these too if you changed them locally:
 - tsconfig.strict.json
 - strict-shims.d.ts
 - jsconfig.json
-
-dist files refreshed during preflight:
-- changed build-meta.json

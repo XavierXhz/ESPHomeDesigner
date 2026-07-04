@@ -1,3 +1,20 @@
+## v1.0.0 RC25 - LVGL Import, Calendar, Controls, and E1004 Profile
+**Release Date:** July 3, 2026
+
+This RC25 release addresses recent LVGL export/import reports, adds localization and bar-label controls, and refreshes the supported device/profile list.
+
+### Stability & Verification
+- **LVGL Button Service Fix (Issue #435):** `input_button.*` controls now emit `input_button.press` instead of `button.press`, and action-only button entities are no longer imported as Home Assistant sensors.
+- **LVGL Inline Import Fix (Issue #434):** Native LVGL inline mappings now preserve properties such as `align`, label text, arc ranges, and arc colors during import.
+- **Calendar Export Fixes (Issue #432 and Issue #431):** Direct calendar exports no longer use unsupported rounded-fill primitives, and calendar widgets now support localized day/month labels in English, German, French, Dutch, Spanish, and Italian.
+- **Editor Splitter Persistence (Issue #437):** YAML, properties, and code panel split sizes now persist across reloads and tab switches.
+- **LVGL Bar Enhancements (Discussion #430):** LVGL bars now support optional top and bottom caption text while preserving the previous no-caption export and preview behavior.
+- **LVGL Media Slider Robustness (Discussion #420):** Media-player sliders now bind to the `volume_level` attribute for state updates instead of the media player's textual state.
+- **Device Profiles (Discussion #254 and E1004):** Confirmed the Guition JC4880P443 profile is already present and registered the Seeedstudio reTerminal E1004 13.3 inch Spectra 6 profile as a visible but disabled coming-soon device until ESPHome driver/model support is upstream.
+- **Release Metadata Refresh:** Updated package metadata, Home Assistant manifest version, runtime version string, visible header label, release notes, schema hash, and rebuilt frontend assets for the RC25 release line.
+
+---
+
 ## v1.0.0 RC24.1 - E-Paper Color Inversion Defaults Hotfix
 **Release Date:** June 21, 2026
 
