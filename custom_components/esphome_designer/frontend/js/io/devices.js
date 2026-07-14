@@ -380,6 +380,21 @@ export const DEVICE_PROFILES = {
     features: { psram: true, buzzer: false, buttons: false, lcd: true, lvgl: true, touch: true },
     touch: { platform: "gt911", id: "device_touchscreen" }
   },
+  waveshare_esp32_p4_86_panel: {
+    name: "Waveshare ESP32-P4-86-Panel 720x720",
+    displayType: "color",
+    chip: "esp32-p4",
+    board: "esp32-p4-evboard",
+    displayPlatform: "mipi_dsi",
+    displayModel: "WAVESHARE-P4-86-PANEL",
+    displayId: "my_display",
+    touchscreenId: "my_touchscreen",
+    isPackageBased: true,
+    hardwarePackage: "hardware/waveshare-esp32-p4-86-panel.yaml",
+    resolution: { width: 720, height: 720 },
+    features: { psram: true, buzzer: false, buttons: false, lcd: true, lvgl: true, touch: true },
+    touch: { platform: "gt911", id: "my_touchscreen" }
+  },
   geekmagic_mini_esp8266: {
     name: "GeekMagic Mini (ESP8266)",
     displayType: "color",

@@ -1,7 +1,7 @@
       <div class="code-panel">
         <div class="code-panel-header">
           <div class="code-panel-title">
-            <button id="toggleYamlBtn" class="btn-icon btn-xs code-toggle-btn" title="Toggle YAML Panel">
+            <button id="toggleYamlBtn" class="btn-icon btn-xs code-toggle-btn" title="切换 YAML 面板">
               <svg class="chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
                 stroke-width="3">
                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -10,41 +10,41 @@
             ESPHome YAML
           </div>
           <div class="code-panel-actions">
-            <button id="toggleHighlightBtn" class="btn btn-secondary btn-xs btn-icon" title="Toggle Syntax Highlighting"
+            <button id="toggleHighlightBtn" class="btn btn-secondary btn-xs btn-icon" title="切换语法高亮"
               style="width: auto; padding: 0 6px; border-radius: 4px;">
               <span class="mdi mdi-palette-outline" style="font-size: 14px;"></span>
             </button>
-            <button id="aiPromptBtn" class="btn btn-secondary btn-xs btn-icon" title="AI Assistant"
+            <button id="aiPromptBtn" class="btn btn-secondary btn-xs btn-icon" title="AI 助手"
               style="width: auto; padding: 0 6px; border-radius: 4px;">
               <span class="mdi mdi-robot-outline" style="font-size: 14px;"></span>
             </button>
-            <button id="copySnippetBtn" class="btn btn-secondary btn-xs" title="Copy full YAML output">
-              <span class="mdi mdi-content-copy" style="font-size: 12px; margin-right: 4px;"></span>All
+            <button id="copySnippetBtn" class="btn btn-secondary btn-xs" title="复制完整 YAML 输出">
+              <span class="mdi mdi-content-copy" style="font-size: 12px; margin-right: 4px;"></span>全部
             </button>
             <button id="copyUiYamlBtn" class="btn btn-secondary btn-xs"
-              title="Copy UI YAML without hardware/system sections">
+              title="仅复制 UI YAML（不含硬件/系统部分）">
               <span class="mdi mdi-content-copy" style="font-size: 12px; margin-right: 4px;"></span>UI
             </button>
-            <button id="copyLambdaBtn" class="btn btn-secondary btn-xs" title="Copy display lambda only (C++ code)">
+            <button id="copyLambdaBtn" class="btn btn-secondary btn-xs" title="仅复制显示 lambda（C++ 代码）">
               <span class="mdi mdi-content-copy" style="font-size: 12px; margin-right: 4px;"></span>λ
             </button>
             <button id="copyOEPLServiceBtn" class="btn btn-secondary btn-xs" style="display:none;"
-              title="Copy full HA Service Call">
+              title="复制完整 HA 服务调用">
               <span class="mdi mdi-content-copy" style="font-size: 12px; margin-right: 4px;"></span>OEPL
             </button>
             <button id="copyODPServiceBtn" class="btn btn-secondary btn-xs" style="display:none;"
-              title="Copy full HA Service Call">
+              title="复制完整 HA 服务调用">
               <span class="mdi mdi-content-copy" style="font-size: 12px; margin-right: 4px;"></span>ODP
             </button>
-            <button id="fullscreenSnippetBtn" class="btn btn-secondary btn-xs btn-icon" title="Expand code panel"
+            <button id="fullscreenSnippetBtn" class="btn btn-secondary btn-xs btn-icon" title="展开代码面板"
               style="width: auto; padding: 0 6px; border-radius: 4px;">
               <span class="mdi mdi-fullscreen" style="font-size: 14px;"></span>
             </button>
             <button id="clearYamlOverrideBtn" class="btn btn-secondary btn-xs" style="display:none;"
-              title="Return to the generated YAML for this layout">
+              title="恢复到生成的 YAML">
               Auto
             </button>
-            <button id="updateLayoutBtn" class="btn btn-secondary btn-xs btn-icon" title="Import YAML back to canvas"
+            <button id="updateLayoutBtn" class="btn btn-secondary btn-xs btn-icon" title="从 YAML 导入回画布"
               style="width: auto; padding: 0 6px; border-radius: 4px;">
               <span class="mdi mdi-import" style="font-size: 14px;"></span>
             </button>
@@ -54,7 +54,7 @@
           style="background: rgba(255, 159, 67, 0.1); border-bottom: 1px solid rgba(255, 159, 67, 0.2); padding: 8px 12px; font-size: 10px; color: #ff9f43; display: flex; align-items: center; gap: 8px;">
           <span class="mdi mdi-alert-circle-outline" style="font-size: 14px;"></span>
           <div>
-            <strong>OpenEpaperLink JSON (Beta)</strong> - Copy this to Home Assistant → Developer Tools → Services →
+            <strong>OpenEpaperLink JSON (Beta)</strong> - 复制到 Home Assistant → 开发者工具 → 服务 →
             <code>open_epaper_link.drawcustom</code>
           </div>
         </div>
@@ -62,12 +62,12 @@
           style="background: rgba(82, 199, 234, 0.1); border-bottom: 1px solid rgba(82, 199, 234, 0.2); padding: 8px 12px; font-size: 10px; color: var(--accent); display: flex; align-items: center; gap: 8px;">
           <span class="mdi mdi-informational" style="font-size: 14px;"></span>
           <div>
-            <strong>OpenDisplay JSON (ODP)</strong> - Compatible with ODP v1 primitives.
+            <strong>OpenDisplay JSON (ODP)</strong> - 兼容 ODP v1 原语
           </div>
         </div>
         <div class="snippet-container">
           <pre id="highlightLayer" class="highlight-layer" aria-hidden="true"></pre>
           <textarea id="snippetBox" class="snippet-box" spellcheck="false"
-            placeholder="# Click 'Generate' to see the ESPHome configuration..."></textarea>
+            placeholder="# 点击 '生成' 查看 ESPHome 配置..."></textarea>
         </div>
       </div>

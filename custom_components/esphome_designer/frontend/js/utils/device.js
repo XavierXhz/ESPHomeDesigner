@@ -33,6 +33,7 @@ export function getDeviceDisplayName(model) {
         case "reterminal_e1002": return "reTerminal E1002 (6-Color)";
         case "esp32_s3_photopainter": return "Waveshare PhotoPainter (7-Color)";
         case "trmnl": return "Official TRMNL (ESP32-C3)";
+        case "waveshare_esp32_p4_86_panel": return "Waveshare ESP32-P4-86-Panel";
         case "reterminal_e1001":
         default: return "reTerminal E1001 (Monochrome)";
     }

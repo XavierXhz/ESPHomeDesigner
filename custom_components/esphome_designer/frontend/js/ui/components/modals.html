@@ -4,13 +4,13 @@
   <div class="modal">
     <div class="modal-header">
       <div style="display: flex; align-items: center; gap: 12px;">
-        ESPHome YAML (Fullscreen)
+        ESPHome YAML（全屏）
         <button id="toggleFullscreenHighlightBtn" class="btn btn-secondary btn-xs btn-icon"
-          title="Toggle Syntax Highlighting" style="width: auto; padding: 0 6px; border-radius: 4px;">
+          title="切换语法高亮" style="width: auto; padding: 0 6px; border-radius: 4px;">
           <span class="mdi mdi-palette-outline" style="font-size: 14px;"></span>
         </button>
       </div>
-      <button id="snippetFullscreenClose" class="btn btn-secondary">Close</button>
+      <button id="snippetFullscreenClose" class="btn btn-secondary">关闭</button>
     </div>
     <div class="modal-body">
       <div class="snippet-container" id="snippetFullscreenContainer" style="height: 100%;">
@@ -25,140 +25,140 @@
 <div id="importSnippetModal" class="modal-backdrop hidden">
   <div class="modal">
     <div class="modal-header">
-      <div>Import Layout from YAML</div>
-      <button id="importSnippetCancel" class="btn btn-secondary">Cancel</button>
+      <div>从 YAML 导入布局</div>
+      <button id="importSnippetCancel" class="btn btn-secondary">取消</button>
     </div>
     <div class="modal-body">
       <textarea id="importSnippetTextarea" class="prop-input" style="height:400px; font-family:monospace;"
-        placeholder="# Paste ESPHome YAML here..."></textarea>
+        placeholder="# 在此粘贴 ESPHome YAML..."></textarea>
       <div id="importSnippetError" style="color:var(--danger); font-size:11px; margin-top:8px;"></div>
     </div>
     <div class="modal-actions">
-      <button id="importSnippetConfirm" class="btn btn-secondary">Import</button>
+      <button id="importSnippetConfirm" class="btn btn-secondary">导入</button>
     </div>
   </div>
 </div>
 
-<!-- Page Settings Modal -->
+<!-- 页面设置 Modal -->
 <div id="pageSettingsModal" class="modal-backdrop hidden">
   <div class="modal">
     <div class="modal-header">
-      <div>Page Settings</div>
-      <button id="pageSettingsClose" class="btn btn-secondary">Close</button>
+      <div>页面设置</div>
+      <button id="pageSettingsClose" class="btn btn-secondary">关闭</button>
     </div>
     <div class="modal-body">
       <div class="field">
-        <div class="prop-label">Page Name</div>
+        <div class="prop-label">页面名称</div>
         <input id="pageSettingsName" class="prop-input" type="text" />
       </div>
       <div class="field">
-        <div class="prop-label">Refresh Mode</div>
+        <div class="prop-label">刷新模式</div>
         <select id="pageSettingsRefreshMode" class="prop-input">
-          <option value="interval">Periodic Interval</option>
-          <option value="daily">Daily at specific time</option>
+          <option value="interval">定时刷新</option>
+          <option value="daily">每日指定时间</option>
         </select>
       </div>
       <div class="field" id="field-refresh-interval">
-        <div class="prop-label">Interval (seconds)</div>
+        <div class="prop-label">间隔（秒）</div>
         <input id="pageSettingsRefresh" class="prop-input" type="number" min="0" placeholder="60" />
       </div>
       <div class="field" id="field-refresh-time" style="display:none;">
-        <div class="prop-label">Wake-up Time (HH:MM)</div>
+        <div class="prop-label">唤醒时间（HH:MM）</div>
         <input id="pageSettingsRefreshTime" class="prop-input" type="time" />
       </div>
       <div class="field">
-        <div class="prop-label">Visibility Window</div>
+        <div class="prop-label">可见时段</div>
         <div style="display: flex; gap: 8px;">
           <div style="flex: 1;">
-            <div style="font-size: 10px; color: var(--muted); margin-bottom: 2px;">Start (Optional)</div>
+            <div style="font-size: 10px; color: var(--muted); margin-bottom: 2px;">开始（可选）</div>
             <input id="pageSettingsVisibleFrom" class="prop-input" type="time" />
           </div>
           <div style="flex: 1;">
-            <div style="font-size: 10px; color: var(--muted); margin-bottom: 2px;">End (Optional)</div>
+            <div style="font-size: 10px; color: var(--muted); margin-bottom: 2px;">结束（可选）</div>
             <input id="pageSettingsVisibleTo" class="prop-input" type="time" />
           </div>
         </div>
       </div>
       <div class="field">
-        <div class="prop-label">Visual Style</div>
+        <div class="prop-label">视觉风格</div>
         <select id="pageSettingsDarkMode" class="prop-input">
-          <option value="inherit">Inherit Global</option>
-          <option value="light">Always Light</option>
-          <option value="dark">Always Dark</option>
+          <option value="inherit">继承全局</option>
+          <option value="light">始终浅色</option>
+          <option value="dark">始终深色</option>
         </select>
       </div>
       <div class="field">
-        <div class="prop-label">Layout Mode (LVGL)</div>
+        <div class="prop-label">布局模式（LVGL）</div>
         <select id="pageSettingsLayoutMode" class="prop-input">
-          <option value="absolute">Absolute Positioning</option>
-          <option value="grid">Grid Layout</option>
+          <option value="absolute">绝对定位</option>
+          <option value="grid">网格布局</option>
         </select>
         <div id="field-grid-size" style="display:none; margin-top:8px;">
-          <div class="prop-label">Grid Size (RxC)</div>
+          <div class="prop-label">网格尺寸（行×列）</div>
           <input id="pageSettingsGridSize" class="prop-input" type="text" placeholder="4x4" pattern="[0-9]+x[0-9]+" />
-          <div style="font-size:10px; color:var(--muted); margin-top:4px;">Format: rows×columns, e.g. 2x3, 4x4</div>
+          <div style="font-size:10px; color:var(--muted); margin-top:4px;">格式：行×列，例如 2x3、4x4</div>
         </div>
       </div>
     </div>
     <div class="modal-actions">
-      <button id="pageSettingsSave" class="btn btn-secondary">Save Changes</button>
+      <button id="pageSettingsSave" class="btn btn-secondary">保存更改</button>
     </div>
   </div>
 </div>
 
-<!-- Device Settings Modal -->
+<!-- 设备设置 Modal -->
 <div id="deviceSettingsModal" class="modal-backdrop hidden">
   <div class="modal">
     <div class="modal-header">
-      <div>Device Settings</div>
-      <button id="deviceSettingsClose" class="btn btn-secondary">Close</button>
+      <div>设备设置</div>
+      <button id="deviceSettingsClose" class="btn btn-secondary">关闭</button>
     </div>
     <div class="modal-body">
       <div class="settings-grid">
         <!-- PRIMARY SETTINGS (Top 2x2 Grid) -->
         <div class="primary-settings-grid">
           <div class="field">
-            <div class="prop-label">Friendly Name</div>
-            <input id="deviceName" class="prop-input" type="text" placeholder="My E-Ink Device" />
+            <div class="prop-label">设备名称</div>
+            <input id="deviceName" class="prop-input" type="text" placeholder="我的墨水屏设备" />
           </div>
 
           <div class="field" id="renderingModeField">
-            <div class="prop-label">Rendering Mode</div>
+            <div class="prop-label">渲染模式</div>
             <select id="renderingMode" class="prop-input">
-              <option value="direct">Direct (Display Lambda)</option>
-              <option value="lvgl">LVGL (Recommended for LCD)</option>
-              <option value="c">C/C++ Drawing Code</option>
+              <option value="direct">直接（显示 Lambda）</option>
+              <option value="lvgl">LVGL（推荐用于 LCD）</option>
+              <option value="c">C/C++ 绘图代码</option>
               <option value="oepl">OpenEpaperLink JSON (Drawing Protocol)</option>
               <option value="opendisplay">OpenDisplay JSON (ODP)</option>
             </select>
           </div>
 
           <div class="field">
-            <div class="prop-label">Screen Orientation</div>
+            <div class="prop-label">屏幕方向</div>
             <select id="deviceOrientation" class="prop-input">
-              <option value="landscape">Landscape</option>
-              <option value="portrait">Portrait</option>
+              <option value="landscape">横屏</option>
+              <option value="portrait">竖屏</option>
             </select>
           </div>
         </div>
 
         <!-- SECONDARY SETTINGS (Left Column) -->
         <div class="settings-column">
-          <!-- Dynamic Hardware Profile Section (ESPHome Only) -->
+          <!-- Dynamic 硬件配置 Section (ESPHome Only) -->
           <div class="field" id="deviceModelField"
             style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px; margin-bottom: 8px;">
             <div class="prop-label" style="display:flex; justify-content:space-between; align-items:center;">
-              <span>Hardware Profile</span>
+              <span>硬件配置</span>
               <div style="display: flex; gap: 4px;">
                 <button id="reloadHardwareBtn" class="btn btn-secondary btn-xs"
-                  style="font-size: 10px; padding: 2px 6px;" title="Reload hardware profiles from server">⟳
-                  Reload</button>
+                  style="font-size: 10px; padding: 2px 6px;" title="刷新 hardware profiles from server">⟳
+                  刷新</button>
                 <button id="importHardwareBtn" class="btn btn-secondary btn-xs"
-                  style="font-size: 10px; padding: 2px 6px;">Import Recipe</button>
+                  style="font-size: 10px; padding: 2px 6px;">导入配置</button>
               </div>
             </div>
             <select id="deviceModel" class="prop-input">
-              <option value="custom">Custom Profile...</option>
+              <option value="custom">自定义配置...</option>
             </select>
             <input type="file" id="hardwareFileInput" accept=".yaml" style="display:none;" />
           </div>
@@ -979,8 +979,8 @@
 <div id="saveProfileModal" class="modal-backdrop hidden" style="z-index: 2000;">
   <div class="modal" style="max-width: 400px;">
     <div class="modal-header">
-      <div>Save Hardware Profile</div>
-      <button id="saveProfileClose" class="btn btn-secondary">Cancel</button>
+      <div>Save 硬件配置</div>
+      <button id="saveProfileClose" class="btn btn-secondary">取消</button>
     </div>
     <div class="modal-body">
       <div style="font-size: 11px; opacity: 0.7; margin-bottom: 12px;">
@@ -1003,7 +1003,7 @@
   <div class="modal">
     <div class="modal-header">
       <div>Editor Preferences</div>
-      <button id="editorSettingsClose" class="btn btn-secondary">Close</button>
+      <button id="editorSettingsClose" class="btn btn-secondary">关闭</button>
     </div>
     <div class="modal-body">
       <!-- CATEGORY: VIEW & THEME -->
@@ -1262,7 +1262,7 @@
   <div class="modal" style="max-width: 600px;">
     <div class="modal-header">
       <div>AI Design Assistant</div>
-      <button id="aiPromptClose" class="btn btn-secondary">Close</button>
+      <button id="aiPromptClose" class="btn btn-secondary">关闭</button>
     </div>
     <div class="modal-body">
       <div id="aiConfigWarning"
