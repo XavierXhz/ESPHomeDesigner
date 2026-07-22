@@ -238,7 +238,7 @@ export default defineConfig({
                 if (req.method === 'OPTIONS') { res.statusCode = 204; res.end(); return; }
                 try {
                     if (url.pathname === '/api/yaml-project/pages' && req.method === 'GET') {
-                        var files = fs.readdirSync(yamlDir + '/ui').filter(function(f) { return f.startsWith('page_') && f.endsWith('.yaml'); });
+                        var files = fs.readdirSync(yamlDir + '/ui').filter(function(f) { return f.startsWith('page') && f.endsWith('.yaml'); });
                         res.setHeader('Content-Type', 'application/json');
                         res.end(JSON.stringify({ files: files }));
                         return;
