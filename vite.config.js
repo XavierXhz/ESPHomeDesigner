@@ -144,8 +144,8 @@ export default defineConfig({
     },
     server: {
         host: true,
-        port: 5174,
-        strictPort: true,
+        port: 8899,
+        strictPort: false,
         open: false,
         fs: {
             allow: [__dirname]
