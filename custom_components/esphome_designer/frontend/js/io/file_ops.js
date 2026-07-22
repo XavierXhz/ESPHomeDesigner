@@ -38,7 +38,7 @@ export async function loadYamlProject() {
             }
             Logger.log('[YAML_LOAD] Resolved ' + Object.keys(subs).length + ' substitutions');
             setSubstitutions(subs);
-        } catch(e) {
+        } catch {
             Logger.log('[YAML_LOAD] Could not fetch p4-panel.yaml, proceeding without subs');
         }
 
