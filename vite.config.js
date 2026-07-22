@@ -224,6 +224,59 @@ export default defineConfig({
                     }
                 });
             }
+    },
+    {
+        name: 'yaml-project-api',
+        configureServer(server) {
+            const yamlDir = '/home/xavier/hermes_workspace/smart-home/trae-ui-panel/ui-compilable';
+            server.middlewares.use((req, res, next) => {
+                if (!req.url || !req.url.startsWith('/api/yaml-project')) return next();
+                const url = new URL(req.url, 'http://' + req.headers.host);
+                res.setHeader('Access-Control-Allow-Origin', '*');
+                res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+                res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+                if (req.method === 'OPTIONS') { res.statusCode = 204; res.end(); return; }
+                try {
+                    if (url.pathname === '/api/yaml-project/pages' && req.method === 'GET') {
+                        var files = fs.readdirSync(yamlDir + '/ui').filter(function(f) { return f.startsWith('page_') && f.endsWith('.yaml'); });
+                        res.setHeader('Content-Type', 'application/json');
+                        res.end(JSON.stringify({ files: files }));
+                        return;
+                    }
+                    if (url.pathname === '/api/yaml-project/page' && req.method === 'GET') {
+                        var fname = url.searchParams.get('file');
+                        if (!fname) { res.statusCode = 400; res.end('Missing file'); return; }
+                        var fp = yamlDir + '/ui/' + fname;
+                        if (!fs.existsSync(fp)) { res.statusCode = 404; res.end('Not found'); return; }
+                        res.setHeader('Content-Type', 'text/yaml; charset=utf-8');
+                        res.end(fs.readFileSync(fp, 'utf-8'));
+                        return;
+                    }
+                    if (url.pathname === '/api/yaml-project/p4-panel' && req.method === 'GET') {
+                        var fp = yamlDir + '/p4-panel.yaml';
+                        if (!fs.existsSync(fp)) { res.statusCode = 404; res.end('Not found'); return; }
+                        res.setHeader('Content-Type', 'text/yaml; charset=utf-8');
+                        res.end(fs.readFileSync(fp, 'utf-8'));
+                        return;
+                    }
+                    if (url.pathname === '/api/yaml-project/page' && req.method === 'POST') {
+                        var body = '';
+                        req.on('data', function(c) { body += c; });
+                        req.on('end', function() {
+                            try {
+                                var data = JSON.parse(body);
+                                if (!data.file || !data.content) { res.statusCode = 400; res.end('Missing file/content'); return; }
+                                fs.writeFileSync(yamlDir + '/ui/' + data.file, data.content, 'utf-8');
+                                res.setHeader('Content-Type', 'application/json');
+                                res.end(JSON.stringify({ ok: true }));
+                            } catch(e) { res.statusCode = 500; res.end(JSON.stringify({ error: e.message })); }
+                        });
+                        return;
+                    }
+                    res.statusCode = 404; res.end('Unknown API');
+                } catch(err) { res.statusCode = 500; res.end(JSON.stringify({ error: err.message })); }
+            });
         }
+    }
     ]
 });

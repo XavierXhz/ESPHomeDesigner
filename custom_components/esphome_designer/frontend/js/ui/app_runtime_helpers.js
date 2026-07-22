@@ -2,7 +2,7 @@ import { hasHaBackend, isDeployedInHa } from '../utils/env.js';
 import { Logger } from '../utils/logger.js';
 import { showToast } from '../utils/dom.js';
 import { fetchEntityStates, loadLayoutFromBackend, saveLayoutToBackend } from '../io/ha_api.js';
-import { handleFileSelect, saveLayoutToFile } from '../io/file_ops.js';
+import { handleFileSelect, saveLayoutToFile, loadYamlProject, saveYamlProject } from '../io/file_ops.js';
 
 /**
  * @typedef {{
@@ -160,6 +160,22 @@ export function bindGlobalButtons({
     if (manageLayoutsBtn) {
         manageLayoutsBtn.addEventListener('click', async () => {
             await openLayoutManager();
+        });
+    }
+
+    const loadYamlProjectBtn = document.getElementById('loadYamlProjectBtn');
+    if (loadYamlProjectBtn) {
+        loadYamlProjectBtn.addEventListener('click', async () => {
+            showToast('正在加载YAML项目...', 'info');
+            await loadYamlProject();
+        });
+    }
+
+    const saveYamlProjectBtn = document.getElementById('saveYamlProjectBtn');
+    if (saveYamlProjectBtn) {
+        saveYamlProjectBtn.addEventListener('click', async () => {
+            showToast('正在保存YAML项目...', 'info');
+            await saveYamlProject();
         });
     }
 }
