@@ -253,10 +253,10 @@ export default defineConfig({
                         return;
                     }
                     if (url.pathname === '/api/yaml-project/p4-panel' && req.method === 'GET') {
-                        var fp = yamlDir + '/p4-panel.yaml';
-                        if (!fs.existsSync(fp)) { res.statusCode = 404; res.end('Not found'); return; }
+                        var p4Path = yamlDir + '/p4-panel.yaml';
+                        if (!fs.existsSync(p4Path)) { res.statusCode = 404; res.end('Not found'); return; }
                         res.setHeader('Content-Type', 'text/yaml; charset=utf-8');
-                        res.end(fs.readFileSync(fp, 'utf-8'));
+                        res.end(fs.readFileSync(p4Path, 'utf-8'));
                         return;
                     }
                     if (url.pathname === '/api/yaml-project/page' && req.method === 'POST') {
