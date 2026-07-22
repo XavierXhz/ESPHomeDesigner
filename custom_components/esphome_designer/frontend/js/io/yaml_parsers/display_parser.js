@@ -2,6 +2,7 @@ import { Logger } from '../../utils/logger.js';
 
 import { buildWidgetProps } from './widget_props_map.js';
 import { parseCppDrawingCommand } from './cpp_drawing_parser.js';
+import { resolveProps, mapFontName } from './subs_resolver.js';
 
 /**
  * @typedef {{ load: (text: string, options?: Record<string, any>) => any }} YamlModuleLike
@@ -436,6 +437,9 @@ export function parseDisplayBlocks(lambdaLines, rawLines, deviceSettings, getESP
             const res = parseYamlSubBlock(lambdaLines, i + 1, indent + 2);
             Object.assign(nativeProps, res.value || {});
             i = res.nextJ - 1;
+            // Resolve ESPHome ${substitutions} and map custom fonts
+            resolveProps(nativeProps);
+            if (nativeProps.text_font) nativeProps.text_font = mapFontName(nativeProps.text_font);
             if (widgetType === "lvgl_button") applyLvglButtonImportHints(nativeProps);
 
             const widget = {

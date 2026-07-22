@@ -1,6 +1,7 @@
 import { AppState } from '../core/state';
 import { loadLayoutIntoState, parseSnippetYamlOffline } from './yaml_import';
 import { Logger } from '../utils/logger.js';
+import { setSubstitutions } from './yaml_parsers/subs_resolver.js';
 
 // P4 Panel YAML project directory (served via vite middleware)
 const YAML_API = '/api/yaml-project';
@@ -36,6 +37,7 @@ export async function loadYamlProject() {
                 subs[m[1]] = m[2];
             }
             Logger.log('[YAML_LOAD] Resolved ' + Object.keys(subs).length + ' substitutions');
+            setSubstitutions(subs);
         } catch(e) {
             Logger.log('[YAML_LOAD] Could not fetch p4-panel.yaml, proceeding without subs');
         }
@@ -52,22 +54,6 @@ export async function loadYamlProject() {
             var pageId = sorted[i];
             var yamlResp = await fetch(YAML_API + '/page?file=' + pageId + '.yaml');
             var yamlText = await yamlResp.text();
-
-            // Resolve ${color_xxx} → "0xRRGGBB" substitutions
-            Object.keys(subs).forEach(function(key) {
-                var searchStr = '${' + key + '}';
-                var replaceStr = '"' + subs[key] + '"';
-                // Replace all occurrences
-                while (yamlText.indexOf(searchStr) !== -1) {
-                    yamlText = yamlText.replace(searchStr, replaceStr);
-                }
-            });
-
-            // Map custom font names to Designer-compatible font
-            // montserrat_96 → font size 96 → keep size info but use designer font
-            yamlText = yamlText.replace(/text_font:\s*montserrat_\d+/g, 'text_font: font_roboto_400_20');
-            yamlText = yamlText.replace(/text_font:\s*noto_sc_\d+/g, 'text_font: font_roboto_400_20');
-            yamlText = yamlText.replace(/text_font:\s*mdi_weather/g, 'text_font: font_roboto_400_20');
 
             var parsed = parseSnippetYamlOffline(yamlText);
             if (parsed && parsed.pages && parsed.pages.length > 0) {
