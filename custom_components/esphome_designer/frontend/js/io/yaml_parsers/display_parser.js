@@ -439,7 +439,7 @@ export function parseDisplayBlocks(lambdaLines, rawLines, deviceSettings, getESP
             i = res.nextJ - 1;
             // Resolve ESPHome ${substitutions} and map custom fonts
             resolveProps(nativeProps);
-            if (nativeProps.text_font) nativeProps.text_font = mapFontName(nativeProps.text_font);
+            if (nativeProps.text_font) { var fm = mapFontName(nativeProps.text_font); nativeProps.text_font = fm.fontName; nativeProps.font_size = fm.fontSize; }
             if (widgetType === "lvgl_button") applyLvglButtonImportHints(nativeProps);
 
             const widget = {

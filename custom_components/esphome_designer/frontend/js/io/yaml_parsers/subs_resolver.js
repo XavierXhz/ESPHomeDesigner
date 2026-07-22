@@ -56,20 +56,20 @@ export function resolveProps(obj) {
 }
 
 /**
- * Map a custom ESPHome font name to a Designer-compatible font reference.
- * Extracts size from montserrat_96 → font_roboto_400_20 (keeps 20 as default).
+ * Map a custom ESPHome font name to a Designer-compatible font reference
+ * AND extract font size from the name (montserrat_96 → size 96).
+ * Returns an object { fontName, fontSize } so the caller can apply both.
  * @param {string} fontName
- * @returns {string}
+ * @returns {{ fontName: string, fontSize: number }}
  */
 export function mapFontName(fontName) {
-    if (!fontName) return 'font_roboto_400_20';
-    // Extract numeric size from montserrat_96, noto_sc_28, etc.
-    var m = fontName.match(/(\d+)/);
+    // Extract numeric size from montserrat_96, noto_sc_28, mdi_weather, etc.
+    var m = fontName ? fontName.match(/(\d+)/) : null;
     var size = m ? parseInt(m[1], 10) : 20;
     // Clamp to reasonable range
-    if (size > 96) size = 96;
+    if (size > 130) size = 130;
     if (size < 10) size = 10;
-    // Map to designer font with appropriate size
-    if (size <= 14) return 'font_roboto_400_14';
-    return 'font_roboto_400_20';
+    // Map to designer-compatible font reference
+    var mappedName = size <= 14 ? 'font_roboto_400_14' : 'font_roboto_400_20';
+    return { fontName: mappedName, fontSize: size };
 }
