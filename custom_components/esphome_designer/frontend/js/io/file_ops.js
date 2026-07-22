@@ -15,6 +15,7 @@ const PAGE_ID_ORDER = ['page_screensaver','page1_home','page_main',
 
 /**
  * Load ESPHome YAML project pages into Designer state.
+ * Resolves ${color_xxx} substitutions from p4-panel.yaml before parsing.
  */
 export async function loadYamlProject() {
     try {
@@ -22,6 +23,22 @@ export async function loadYamlProject() {
         const listResp = await fetch(YAML_API + '/pages');
         const data = await listResp.json();
         const files = data.files || [];
+
+        // Fetch p4-panel.yaml to resolve substitutions
+        var subs = {};
+        try {
+            var p4Resp = await fetch(YAML_API + '/p4-panel');
+            var p4Text = await p4Resp.text();
+            // Parse color substitutions: key: "0xRRGGBB"
+            var subRe = /^\s+(\w+):\s*"(0x[0-9A-Fa-f]+)"/gm;
+            var m;
+            while ((m = subRe.exec(p4Text)) !== null) {
+                subs[m[1]] = m[2];
+            }
+            Logger.log('[YAML_LOAD] Resolved ' + Object.keys(subs).length + ' substitutions');
+        } catch(e) {
+            Logger.log('[YAML_LOAD] Could not fetch p4-panel.yaml, proceeding without subs');
+        }
 
         // Sort by predefined order
         const sorted = PAGE_ID_ORDER.filter(function(id) { return files.includes(id + '.yaml'); });
@@ -35,6 +52,23 @@ export async function loadYamlProject() {
             var pageId = sorted[i];
             var yamlResp = await fetch(YAML_API + '/page?file=' + pageId + '.yaml');
             var yamlText = await yamlResp.text();
+
+            // Resolve ${color_xxx} → "0xRRGGBB" substitutions
+            Object.keys(subs).forEach(function(key) {
+                var searchStr = '${' + key + '}';
+                var replaceStr = '"' + subs[key] + '"';
+                // Replace all occurrences
+                while (yamlText.indexOf(searchStr) !== -1) {
+                    yamlText = yamlText.replace(searchStr, replaceStr);
+                }
+            });
+
+            // Map custom font names to Designer-compatible font
+            // montserrat_96 → font size 96 → keep size info but use designer font
+            yamlText = yamlText.replace(/text_font:\s*montserrat_\d+/g, 'text_font: font_roboto_400_20');
+            yamlText = yamlText.replace(/text_font:\s*noto_sc_\d+/g, 'text_font: font_roboto_400_20');
+            yamlText = yamlText.replace(/text_font:\s*mdi_weather/g, 'text_font: font_roboto_400_20');
+
             var parsed = parseSnippetYamlOffline(yamlText);
             if (parsed && parsed.pages && parsed.pages.length > 0) {
                 var pg = parsed.pages[0];
