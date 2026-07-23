@@ -25,6 +25,21 @@ export function buildLvglWidgetProps(widgetType, p, widget, props) {
             : p.checked;
         delete props.color;
         delete props.text_color;
+        // ── 解析 text_font → font_family + font_size ──
+        if (p.text_font && !p.font_size && !p.font_family) {
+            const tfMatch = p.text_font.match(/^(.+?)_(\d+)$/);
+            if (tfMatch) {
+                const familyCode = tfMatch[1];
+                const sizeVal = parseInt(tfMatch[2], 10);
+                const fontFamilyMap = {
+                    'noto_sc': 'Noto Sans SC',
+                    'montserrat': 'Montserrat',
+                    'mdi': 'Material Design Icons',
+                };
+                p.font_size = String(sizeVal);
+                p.font_family = fontFamilyMap[familyCode] || familyCode;
+            }
+        }
         return {
             ...props,
             ...(checked !== undefined ? { checked } : {}),
@@ -261,6 +276,21 @@ export function buildLvglWidgetProps(widgetType, p, widget, props) {
         delete props.bg_color;
         delete props.border_color;
         delete props.color;
+        // ── 解析 text_font: "noto_sc_48" → font_family + font_size ──
+        if (p.text_font && !p.font_size && !p.font_family) {
+            const tfMatch = p.text_font.match(/^(.+?)_(\d+)$/);
+            if (tfMatch) {
+                const familyCode = tfMatch[1];
+                const sizeVal = parseInt(tfMatch[2], 10);
+                const fontFamilyMap = {
+                    'noto_sc': 'Noto Sans SC',
+                    'montserrat': 'Montserrat',
+                    'mdi': 'Material Design Icons',
+                };
+                p.font_size = String(sizeVal);
+                p.font_family = fontFamilyMap[familyCode] || familyCode;
+            }
+        }
         return {
             ...props,
             text: (p.text || "Label").replace(/^"|"$/g, ''),
